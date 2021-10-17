@@ -19,7 +19,13 @@ function Home(){
     return (
         checkpoints.filter(checkpoint => checkpoint.cursus === "Javascript")
             .map(checkpoint =>
-                <Checkpoint key={checkpoint.id} cursus={checkpoint.cursus} title={checkpoint.title} description={checkpoint.description}/>
+                <Checkpoint
+                    key={checkpoint.id}
+                    id={checkpoint.id}
+                    cursus={checkpoint.cursus}
+                    title={checkpoint.title}
+                    description={checkpoint.description}
+                />
             )
     );
 }

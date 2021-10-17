@@ -4,6 +4,7 @@ import {CardContent} from "@mui/material";
 import {CardActions} from "@mui/material";
 import {Button} from "@mui/material";
 import "../App.scss";
+import {Link} from "react-router-dom";
 
 
 function Checkpoint(props) {
@@ -21,7 +22,9 @@ function Checkpoint(props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" >Compléter</Button>
+                <Link to={'/checkpoints/' + props.id}  >
+                    <Button size="small">Compléter</Button>
+                </Link>
             </CardActions>
         </Card>
 

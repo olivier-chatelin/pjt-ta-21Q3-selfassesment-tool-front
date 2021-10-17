@@ -1,41 +1,26 @@
 import * as React from 'react';
 import Checkpoint from "./componennts/Checkpoint";
-import {dividerClasses} from "@mui/material";
+import axios from "axios";
+import {useEffect, useState} from "react";
 function App() {
-    const checkpoints = [
-        {
-            cursus : "Javascript",
-            title : "Checkpoint 1",
-            description : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab cumque dicta doloremque ea expedita facilis non numquam porro possimus tempora?",
-        },
-        {
-            cursus : "Javascript",
-            title : "Checkpoint 2",
-            description : "Lorem ipsum ea expedita facilis non numquam porro possimus tempora?",
-        },
-        {
-            cursus : "Javascript",
-            title : "Checkpoint 3",
-            description : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab cumque dicta doloremque ea expeipsum dolor sit amet, consectetur adipisicing elit. Ab cumque dicta doloremque ea expedita facilis non numquam porro possimus tempora?",
-        },
-        {
-            cursus : "PHP",
-            title : "Checkpoint 1",
-            description : "Lorem ipsum dolor sit amet, consectetur mque dicta doloremque ea expedita facilis non numquam porro possimus tempora?",
-        },
-        {
-            cursus : "PHP",
-            title : "Checkpoint 2",
-            description : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab cumque dicta doloremque ea expedita facilis non numquam porro possimus tempora?",
-        },
-
-    ];
+    const [checkpoints, setCheckpoints] = useState([]);
+    useEffect(()=>{
+        getCheckpoints();
+    },[]);
+    function getCheckpoints(){
+    axios.get('http://localhost:8000/checkpoints')
+        .then((response) => response.data)
+        .then((data)=>{
+            setCheckpoints(data);
+            }
+        );
+    }
 
     return (
-        checkpoints.filter(checkpoint => checkpoint.cursus === "Javascript")
-            .map(checkpoint =>
-            <Checkpoint cursus={checkpoint.cursus} title={checkpoint.title} description={checkpoint.description}/>
-        )
+            checkpoints.filter(checkpoint => checkpoint.cursus === "Javascript")
+                .map(checkpoint =>
+                <Checkpoint key={checkpoint.id} cursus={checkpoint.cursus} title={checkpoint.title} description={checkpoint.description}/>
+                )
     );
 }
 

@@ -21,7 +21,7 @@ function Checkpoint(props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Compléter</Button>
+                <Button size="small" >Compléter</Button>
             </CardActions>
         </Card>
 

@@ -8,17 +8,21 @@ import {Link} from "react-router-dom";
 
 
 function Checkpoint(props) {
+    console.log()
     return(
-        <Card sx={{maxWidth: 400, margin: 5}}>
+        <Card sx={{maxWidth: 600, margin: 5 }}>
             <CardContent>
                 <Typography sx={{fontsize: 14}} color="text.secondary" gutterBottom>
                     {props.cursus}
                 </Typography>
                 <Typography variant="h5" component="div">
-                    {props.title}
+                    Checkpoint {props.index}: {props.title}
                 </Typography>
                 <Typography variant="body2">
-                    {props.description}
+                    Durée: {props.duration}
+                </Typography>
+                <Typography variant="body2">
+                    Compétences globales: {props.globalSkills.map((skill,index)=><span key={index}>{index? ',':''} {skill.name}</span>)}.
                 </Typography>
             </CardContent>
             <CardActions>

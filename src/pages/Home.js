@@ -3,6 +3,11 @@ import axios from "axios";
 import Checkpoint from "../components/Checkpoint";
 
 function Home(){
+    const user = {
+        id: 54,
+        cursus: "PHP",
+
+    }
     const [checkpoints, setCheckpoints] = useState([]);
     useEffect(()=>{
         getCheckpoints();
@@ -11,20 +16,25 @@ function Home(){
         axios.get('http://localhost:8000/checkpoints')
             .then((response) => response.data)
             .then((data)=>{
+                // console.log(data);
                     setCheckpoints(data);
+                console.log(checkpoints);
                 }
             );
     }
 
     return (
-        checkpoints.filter(checkpoint => checkpoint.cursus === "Javascript")
+
+        checkpoints.filter(checkpoint => checkpoint.cursus === user.cursus)
             .map(checkpoint =>
                 <Checkpoint
                     key={checkpoint.id}
-                    id={checkpoint.id}
+                    id={checkpoint.id }
+                    index={checkpoint.index}
                     cursus={checkpoint.cursus}
                     title={checkpoint.title}
-                    description={checkpoint.description}
+                    duration={checkpoint.duration}
+                    globalSkills={checkpoint.globalSkills}
                 />
             )
     );

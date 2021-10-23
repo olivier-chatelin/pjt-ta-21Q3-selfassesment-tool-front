@@ -26,7 +26,6 @@ function Checkpoints() {
                 );
     }
     return (
-
         checkpoints.filter(checkpoint => checkpoint.cursus === user.cursus)
             .map(checkpoint =>
                 <Checkpoint

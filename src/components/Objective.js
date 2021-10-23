@@ -1,30 +1,35 @@
 import React from "react";
-import {Card, CardContent, Typography, Chip} from "@mui/material";
+import {Card, CardContent, Typography, Chip, Box, FormControlLabel, Switch} from "@mui/material";
+import {red, pink, purple, teal, blue, cyan, lime, indigo} from "@mui/material/colors";
 
 
 
 function Objective({name, isBonus,skills}) {
     const colors=
         {
-            css:'primary',
-            pdo:'secondary',
-            mysql:'error',
-            formulaire:'warning',
-            poo:'info',
-            twig:'success'
+            css:purple[500],
+            pdo:teal[500],
+            mysql:lime[500],
+            formulaire:indigo[400],
+            poo:blue[500],
+            twig:cyan[500]
         };
     return(
-        <Card sx={{maxWidth: 1000, margin: 5 }}>
-            <CardContent>
-                    <Typography sx={{fontSize:18}}>
-                        {name}
-                    </Typography>
-                    {skills.map((skill,index)=><Chip key={index} label={skill.name} color={colors[skill.name]}/> ) }
-                    <Typography sx={{fontSize:18, color:"darkred"}}>
-                        {isBonus? "Bonus": ""}
-                    </Typography>
-            </CardContent>
-        </Card>
+        <Box sx={{display:'flex'}}>
+            <Card sx={{minWidth: 1000, m: 5 }}>
+                <CardContent>
+                        <Typography sx={{fontSize:18, display:'flex'}}>
+                            <Box sx={{flexGrow:1}}>
+                                {name}
+                            </Box>
+                                {isBonus && <Chip label="Bonus" sx={{bgcolor:red['A400'], color:"white", ml:1}}/>}
+                        </Typography>
+                                {skills.map((skill,index)=><Chip sx={{bgcolor:colors[skill.name], color:"white", mx:1}} key={index} label={skill.name}/> ) }
+                </CardContent>
+            </Card>
+            <Switch  defaultChecked sx={{alignSelf:"center"}}/>
+        </Box>
+
     );
 }
 export default Objective

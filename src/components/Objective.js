@@ -1,10 +1,11 @@
 import React from "react";
 import {Card, CardContent, Typography, Chip, Box, FormControlLabel, Switch} from "@mui/material";
 import {red, pink, purple, teal, blue, cyan, lime, indigo} from "@mui/material/colors";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 
 
-function Objective({name, isBonus,skills}) {
+function Objective({name, isBonus,skills, id}) {
     const colors=
         {
             css:purple[500],
@@ -14,20 +15,24 @@ function Objective({name, isBonus,skills}) {
             poo:blue[500],
             twig:cyan[500]
         };
+    const [isCheck, setCheck] = useLocalStorage(id, false);
+    const handleCheck = ()=>{
+        setCheck(!isCheck);
+    }
     return(
         <Box sx={{display:'flex'}}>
-            <Card sx={{minWidth: 1000, m: 5 }}>
+            <Card sx={{width: 1000, m: 5 }}>
                 <CardContent>
                         <Typography sx={{fontSize:18, display:'flex'}}>
                             <Box sx={{flexGrow:1}}>
-                                {name}
+                                <span>{id} - </span><span>{name}</span>
                             </Box>
-                                {isBonus && <Chip label="Bonus" sx={{bgcolor:red['A400'], color:"white", ml:1}}/>}
+                                <Switch onChange={handleCheck} checked={isCheck} sx={{alignSelf:"center"}}/>
                         </Typography>
                                 {skills.map((skill,index)=><Chip sx={{bgcolor:colors[skill.name], color:"white", mx:1}} key={index} label={skill.name}/> ) }
+                                {isBonus && <Chip label="Bonus" sx={{bgcolor:red['A400'], color:"white", ml:1}}/>}
                 </CardContent>
             </Card>
-            <Switch  defaultChecked sx={{alignSelf:"center"}}/>
         </Box>
 
     );

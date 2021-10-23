@@ -24,7 +24,7 @@ function MyCheckpoint(){
         <div >
             {checkpoint && (<Typography variant="h3" sx={{margin : 5}}>{checkpoint.title}</Typography>)}
             {checkpoint && (
-                checkpoint.objectives.map(objective=><Objective {...objective} />)
+                checkpoint.objectives.map(objective=><Objective key={objective.id}{...objective} />)
             )}
         </div>
 

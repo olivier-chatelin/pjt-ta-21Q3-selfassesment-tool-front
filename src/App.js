@@ -1,13 +1,13 @@
 import  React from 'react';
 import {BrowserRouter as Router, Switch, Route, useParams} from 'react-router-dom';
-import Home from "./pages/Home";
 import MyCheckpoint from "./pages/MyCheckpoint";
+import Checkpoints from "./pages/Chekpoints";
 function App() {
     return (
         <Router>
             <Switch>
-                <Route exact path="/">
-                    <Home/>
+                <Route exact path="/checkpoints">
+                    <Checkpoints/>
                 </Route>
                 <Route  path="/checkpoints/:id">
                     <MyCheckpoint />

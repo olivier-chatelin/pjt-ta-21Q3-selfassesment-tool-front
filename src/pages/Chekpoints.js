@@ -2,27 +2,29 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Checkpoint from "../components/Checkpoint";
 
-function Home(){
+function Checkpoints() {
     const user = {
         id: 54,
         cursus: "PHP",
 
     }
     const [checkpoints, setCheckpoints] = useState([]);
-    useEffect(()=>{
-        getCheckpoints();
-    },[]);
-    function getCheckpoints(){
-        axios.get('http://localhost:8000/checkpoints')
-            .then((response) => response.data)
-            .then((data)=>{
-                // console.log(data);
-                    setCheckpoints(data);
-                console.log(checkpoints);
-                }
-            );
-    }
 
+    useEffect(() => {
+        getCheckpoints();
+    }, []);
+
+    function getCheckpoints() {
+
+            axios.get('http://localhost:8000/checkpoints')
+                .then((response) => response.data)
+                .then((data) => {
+                        // console.log(data);
+                        setCheckpoints(data);
+                        console.log(checkpoints);
+                    }
+                );
+    }
     return (
 
         checkpoints.filter(checkpoint => checkpoint.cursus === user.cursus)
@@ -39,4 +41,4 @@ function Home(){
             )
     );
 }
-export default Home
+export default Checkpoints

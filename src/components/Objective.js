@@ -2,7 +2,7 @@ import React from "react";
 import {Card, CardContent, Typography, Chip, Box, FormControlLabel, Switch} from "@mui/material";
 import {red, pink, purple, teal, blue, cyan, lime, indigo} from "@mui/material/colors";
 import {useLocalStorage} from "../hooks/useLocalStorage";
-
+import InsightsIcon from '@mui/icons-material/Insights';
 
 
 function Objective({name, isBonus,skills, id}) {
@@ -21,7 +21,7 @@ function Objective({name, isBonus,skills, id}) {
     }
     return(
         <Box sx={{display:'flex'}}>
-            <Card sx={{width: 1000, m: 5 }}>
+            <Card sx={{width: '100%', my: 5 }}>
                 <CardContent>
                         <Typography sx={{fontSize:18, display:'flex'}}>
                             <Box sx={{flexGrow:1}}>

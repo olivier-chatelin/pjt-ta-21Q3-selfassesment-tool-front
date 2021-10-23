@@ -2,7 +2,9 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
 import Objective from "../components/Objective";
-import {Typography} from "@mui/material";
+import {Typography, Button, Box, Container, AppBar, Toolbar, IconButton} from "@mui/material";
+import {grey} from "@mui/material/colors";
+import InsightsIcon from "@mui/icons-material/Insights";
 
 function MyCheckpoint(){
     const [checkpoint, setCheckpoint] = useState(null);
@@ -21,12 +23,24 @@ function MyCheckpoint(){
             );
     }
     return (
-        <div >
-            {checkpoint && (<Typography variant="h3" sx={{margin : 5}}>{checkpoint.title}</Typography>)}
+        <Container >
+            {checkpoint && (<AppBar position="sticky" >
+                                <Toolbar>
+                                    <Typography variant="h4" sx={{mt:1,flexGrow:1}}>{checkpoint.title}  </Typography>
+                                    <IconButton sx={{color:"white", bgcolor:grey[500]}} href={'/results/' + checkpoint.id}>
+                                        <InsightsIcon  fontSize="large"/>
+                                    </IconButton>
+                                </Toolbar>
+                            </AppBar>)}
             {checkpoint && (
                 checkpoint.objectives.map(objective=><Objective key={objective.id}{...objective} />)
             )}
-        </div>
+            {checkpoint && (
+                <IconButton sx={{color:"white", bgcolor:grey[500], mb:5}} href={'/results/' + checkpoint.id}>
+                    <InsightsIcon  fontSize="large"/>
+                </IconButton>
+            )}
+        </Container>
 
     )
 }

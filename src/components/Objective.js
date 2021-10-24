@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {Card, CardContent, Typography, Chip, Box, FormControlLabel, Switch} from "@mui/material";
 import {red, pink, purple, teal, blue, cyan, lime, indigo} from "@mui/material/colors";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import InsightsIcon from '@mui/icons-material/Insights';
 
 
-function Objective({name, isBonus,skills, id}) {
+function Objective({name, isBonus,skills, id,checkpointID}) {
     const colors=
         {
             css:purple[500],
@@ -15,9 +15,25 @@ function Objective({name, isBonus,skills, id}) {
             poo:blue[500],
             twig:cyan[500]
         };
-    const [isCheck, setCheck] = useLocalStorage(id, false);
+    let defaultObjective = {
+        objectiveId:id,
+        checkpointId: checkpointID,
+        isBonus: isBonus,
+        isChecked:false,
+        skills:skills
+
+    }
+    const [localObjective, setLocalObjective] = useLocalStorage("objective"+id,defaultObjective)
     const handleCheck = ()=>{
-        setCheck(!isCheck);
+        let objective = {
+            objectiveId:id,
+            checkpointId: checkpointID,
+            isBonus: isBonus,
+            isChecked:!localObjective.isChecked,
+            skills:skills
+        }
+        console.log('objective', objective);
+        setLocalObjective(objective);
     }
     return(
         <Box sx={{display:'flex'}}>
@@ -27,7 +43,7 @@ function Objective({name, isBonus,skills, id}) {
                             <Box sx={{flexGrow:1}}>
                                 <span>{id} - </span><span>{name}</span>
                             </Box>
-                                <Switch onChange={handleCheck} checked={isCheck} sx={{alignSelf:"center"}}/>
+                                <Switch onChange={handleCheck} checked={localObjective.isChecked} sx={{alignSelf:"center"}}/>
                         </Typography>
                                 {skills.map((skill,index)=><Chip sx={{bgcolor:colors[skill.name], color:"white", mx:1}} key={index} label={skill.name}/> ) }
                                 {isBonus && <Chip label="Bonus" sx={{bgcolor:red['A400'], color:"white", ml:1}}/>}

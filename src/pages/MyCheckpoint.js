@@ -33,7 +33,7 @@ function MyCheckpoint(){
                                 </Toolbar>
                             </AppBar>)}
             {checkpoint && (
-                checkpoint.objectives.map(objective=><Objective key={objective.id}{...objective} />)
+                checkpoint.objectives.map(objective=><Objective key={objective.id}{...objective} checkpointID={checkpoint.id} />)
             )}
             {checkpoint && (
                 <IconButton sx={{color:"white", bgcolor:grey[500], mb:5}} href={'/results/' + checkpoint.id}>

@@ -32,7 +32,6 @@ function Objective({name, isBonus,skills, id,checkpointID}) {
             isChecked:!localObjective.isChecked,
             skills:skills
         }
-        console.log('objective', objective);
         setLocalObjective(objective);
     }
     return(

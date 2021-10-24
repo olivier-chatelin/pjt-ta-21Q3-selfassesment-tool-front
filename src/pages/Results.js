@@ -1,6 +1,4 @@
-import React, {useEffect, useState} from 'react'
 import {Box} from "@mui/material";
-import axios from "axios";
 import '../App.scss';
 import {
     CircularProgressbar,
@@ -8,35 +6,70 @@ import {
     buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import {getObjectivesBy, getRatiosByCheckpointId} from "../services/objectiveRepository";
+import {getRatiosByCheckpointId, getSkillsByCheckPointId, getDataSkillsByCheckpointId} from "../services/objectiveRepository";
+import React from 'react';
+import { Radar } from 'react-chartjs-2';
+
 
 function Results(){
-   const ratio = (getRatiosByCheckpointId(1));
+    //circular progress config
+    const param =window.location.pathname.split('/');
+    const checkpointId = parseInt(param[param.length - 1]);
+    const ratio = (getRatiosByCheckpointId(checkpointId));
+
+    //radar chart config
+    const skillNames = getSkillsByCheckPointId(checkpointId);
+    const skillData = getDataSkillsByCheckpointId(checkpointId);
+    const data = {
+        labels: skillNames,
+        datasets: [
+            {
+                label: 'skills',
+                data: skillData,
+                backgroundColor: 'rgba(62,152,199,0.2)',
+                borderColor: 'rgba(62,152,199,1)',
+                borderWidth: 1,
+            },
+        ],
+    };
+    const options = {
+        scale: {
+            ticks: { beginAtZero: true },
+        },
+    };
 
     return(
-        <Box sx={{width:"25vw", mx:"auto", my:10}} >
+        <Box sx={{display:"flex", alignItems:"center", mt:10}}>
+            <Box sx={{width:"30%"}} >
+                <Box sx={{width:"50%", ml:"50%"}}>
+                      <CircularProgressbarWithChildren
+                        value={ratio.bonusRatio}
+                        strokeWidth={8}
+                        text={`${ratio.bonusRatio + ratio.regularRatio}%`}
+                        styles={buildStyles({
+                            pathColor: "#26a69a",
+                            trailColor: "transparent"
+                        })}
+                      >
+                        <div style={{ width: "84%" }}>
+                            <CircularProgressbar
 
-        <CircularProgressbarWithChildren
-            // className='graph1'
-            value={ratio.bonusRatio}
-            strokeWidth={8}
-            text={`${ratio.bonusRatio + ratio.regularRatio}%`}
-            styles={buildStyles({
-                pathColor: "#26a69a",
-                trailColor: "transparent"
-            })}
-        >
-            <div style={{ width: "84%" }}>
-                <CircularProgressbar
-
-                    value={ratio.regularRatio}
-                    styles={buildStyles({
-                        trailColor: "transparent"
-                    })}
-                />
-            </div>
-        </CircularProgressbarWithChildren>
+                                value={ratio.regularRatio}
+                                styles={buildStyles({
+                                    trailColor: "transparent"
+                                })}
+                            />
+                        </div>
+                    </CircularProgressbarWithChildren>
+                </Box>
+            </Box>
+            <Box sx={{width:"70%",display:"flex",justifyContent:"center", alignItems:"center"}} >
+                <Box sx={{width:"50%"}}>
+                    <Radar data={data} options={options} />
+                </Box>
+            </Box>
         </Box>
+
     );
 }
 export default Results

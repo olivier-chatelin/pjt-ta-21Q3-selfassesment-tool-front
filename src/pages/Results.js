@@ -19,6 +19,10 @@ function Results(){
 
     //radar chart config
     const skillNames = getSkillsByCheckPointId(checkpointId);
+    let topLineData = [];
+    for (const skill of skillNames){
+        topLineData.push(100);
+    }
     const skillData = getDataSkillsByCheckpointId(checkpointId);
     const data = {
         labels: skillNames,
@@ -30,10 +34,23 @@ function Results(){
                 borderColor: 'rgba(62,152,199,1)',
                 borderWidth: 1,
             },
+            {
+                label: 'objective 100%',
+                data: topLineData,
+                backgroundColor: 'rgba(62,152,199,0.0)',
+                borderColor: '#26A69A',
+                borderWidth: 2,
+                pointStyle: 'line',
+
+            },
         ],
     };
     const options = {
         scale: {
+            r:{
+                suggestedMin: 0,
+                suggestedMax: 100
+            },
             ticks: { beginAtZero: true },
         },
     };

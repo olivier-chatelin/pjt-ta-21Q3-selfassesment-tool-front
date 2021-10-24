@@ -1,0 +1,109 @@
+{
+  "uuid": "2ad2dd99-78e5-4691-95c9-1acd482df0ab",
+  "lastMigration": 18,
+  "name": "Self",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 8000,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "7ac2c1fc-d625-4240-8dae-630f2f127e58",
+      "documentation": "Generate random body (JSON, text, CSV, etc) with templating",
+      "method": "get",
+      "endpoint": "checkpoints/",
+      "responses": [
+        {
+          "uuid": "6428e331-6d35-45a9-834d-af9e13248e83",
+          "body": " [\n          {{#repeat 4 comma=true}}\n        { \n            \"id\":{{int 0 100 }},\n            \"index\":{{add @index 1}},\n            \"cursus\" : \"PHP\",\n            \"title\" : \"{{faker 'lorem.sentence' 4 }}\",\n            \"duration\": \"4h\",\n            \"globalSkills\":[\n              {{#repeat 4 comma=true}}\n              {\"id\":{{int 0 100}}, \"name\":\"{{faker 'lorem.slug' 1 }}\"}\n              {{/repeat}}\n\n             ]\n        }\n        {{/repeat}}\n  \n  ]\n  ",
+          "latency": 50,
+          "statusCode": 200,
+          "label": "Success",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Access-Control-Request-Method",
+              "value": "GET,POST,OPTIONS"
+            },
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "6e1d2ccf-926f-4623-8dfa-f83f37d4dac9",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "checkpoints/:checkpointid",
+      "responses": [
+        {
+          "uuid": "9b2e00ab-0ac4-4d16-a366-65927f31a297",
+          "body": " \n{\n  \"id\":1,\n  \"cursus\" : \"PHP\",\n  \"title\" : \"Checkpoint 1 PHP\",\n  \"objectives\": [\n  {{#repeat 15 comma=true}}\n    { \"id\":{{add 1 @index}},\n      \"isBonus\":false,\n      \"name\":\"{{lorem 12}}\",\n      \"skills\":[\n       {{#repeat (int 1 3) comma=true}}\n        {\"name\":\"{{oneOf (array 'css' 'pdo' 'mysql' 'formulaire' 'poo' 'twig')}}\"}\n      {{/repeat}}\n      ]\n    },\n  {{/repeat}},\n  {{#repeat 5}}\n    { \"id\":{{add 16 @index}},\n      \"isBonus\":true,\n      \"name\":\"{{lorem 15}}\",\n      \"skills\":[\n       {{#repeat (int 1 3) comma=true}}\n        {\"name\":\"{{oneOf (array 'css' 'pdo' 'mysql' 'formulaire' 'poo' 'twig')}}\"}\n      {{/repeat}}\n      ]\n    },\n  {{/repeat}}\n  \n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "https": false,
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
+}

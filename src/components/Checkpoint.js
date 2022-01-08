@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 
 
 function Checkpoint(props) {
-    console.log()
     return(
         <Card sx={{maxWidth: 600, margin: 5 }}>
             <CardContent>

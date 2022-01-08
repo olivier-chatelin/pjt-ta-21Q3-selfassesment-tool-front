@@ -84,4 +84,4 @@ function getDataSkillsByCheckpointId(id){
     }
     return result;
 }
-export { getRatiosByCheckpointId, getSkillsByCheckPointId, getDataSkillsByCheckpointId};
+export { getRatiosByCheckpointId, getSkillsByCheckPointId, getDataSkillsByCheckpointId, getObjectivesBy};

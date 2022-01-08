@@ -1,4 +1,6 @@
 import {Box} from "@mui/material";
+import ResultForm from "../components/ResultForm";
+
 import '../App.scss';
 import {
     CircularProgressbar,
@@ -84,6 +86,9 @@ function Results(){
                 <Box sx={{width:"50%"}}>
                     <Radar data={data} options={options} />
                 </Box>
+            </Box>
+            <Box>
+                <ResultForm checkpointId = {checkpointId} />
             </Box>
         </Box>
 

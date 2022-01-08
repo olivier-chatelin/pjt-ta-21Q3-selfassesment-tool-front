@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
 import axios from "axios";
 import Objective from "../components/Objective";
-import {Typography, Button, Box, Container, AppBar, Toolbar, IconButton} from "@mui/material";
+import {Typography, Container, AppBar, Toolbar, IconButton} from "@mui/material";
 import {grey} from "@mui/material/colors";
 import InsightsIcon from "@mui/icons-material/Insights";
 

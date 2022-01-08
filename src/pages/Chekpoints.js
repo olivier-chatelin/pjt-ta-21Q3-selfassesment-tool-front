@@ -3,12 +3,9 @@ import axios from "axios";
 import Checkpoint from "../components/Checkpoint";
 
 function Checkpoints() {
-    const user = {
-        id: 54,
-        cursus: "PHP",
-
-    }
     const [checkpoints, setCheckpoints] = useState([]);
+    const [curriculum, setCurriculum] =useState('PHP');
+
 
     useEffect(() => {
         getCheckpoints();
@@ -25,7 +22,7 @@ function Checkpoints() {
                 );
     }
     return (
-        checkpoints.filter(checkpoint => checkpoint.curriculum === user.cursus)
+        checkpoints.filter(checkpoint => checkpoint.curriculum === curriculum)
             .map(checkpoint =>
                 <Checkpoint
                     key={checkpoint.id}

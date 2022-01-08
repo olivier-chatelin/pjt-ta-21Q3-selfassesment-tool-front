@@ -15,25 +15,24 @@ function Checkpoints() {
     }, []);
 
     function getCheckpoints() {
-
-            axios.get('http://localhost:8000/checkpoints')
+            axios.get('https://localhost:8000/checkpoints')
                 .then((response) => response.data)
                 .then((data) => {
                         // console.log(data);
                         setCheckpoints(data);
-                        console.log(checkpoints);
+                        console.log('checkpoints',checkpoints);
                     }
                 );
     }
     return (
-        checkpoints.filter(checkpoint => checkpoint.cursus === user.cursus)
+        checkpoints.filter(checkpoint => checkpoint.curriculum === user.cursus)
             .map(checkpoint =>
                 <Checkpoint
                     key={checkpoint.id}
                     id={checkpoint.id }
-                    index={checkpoint.index}
-                    cursus={checkpoint.cursus}
-                    title={checkpoint.title}
+                    index={checkpoint.number}
+                    cursus={checkpoint.curriculum}
+                    title={checkpoint.name}
                     duration={checkpoint.duration}
                     globalSkills={checkpoint.globalSkills}
                 />

@@ -14,7 +14,7 @@ function MyCheckpoint(){
         getCheckpointById(checkpointId);
     },[]);
     function getCheckpointById(checkpointId){
-        axios.get('http://localhost:8000/checkpoints/'+checkpointId)
+        axios.get('https://localhost:8000/checkpoints/'+checkpointId)
             .then((response) => response.data)
             .then((data)=>{
                     setCheckpoint(data);
@@ -26,7 +26,7 @@ function MyCheckpoint(){
         <Container >
             {checkpoint && (<AppBar position="sticky" >
                                 <Toolbar>
-                                    <Typography variant="h4" sx={{mt:1,flexGrow:1}}>{checkpoint.title}  </Typography>
+                                    <Typography variant="h4" sx={{mt:1,flexGrow:1}}>{checkpoint.curriculum} Checkpoint {checkpoint.number}: {checkpoint.name} </Typography>
                                     <IconButton sx={{color:"white", bgcolor:grey[500]}} href={'/results/' + checkpoint.id}>
                                         <InsightsIcon  fontSize="large"/>
                                     </IconButton>

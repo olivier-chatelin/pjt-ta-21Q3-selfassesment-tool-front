@@ -22,7 +22,7 @@ function Checkpoint(props) {
                     Durée: {props.duration}
                 </Typography>
                 <Typography variant="body2">
-                    Compétences globales: {props.globalSkills.map((skill,index)=><span key={index}>{index? ',':''} {skill.name}</span>)}.
+                    Compétences globales: {props.globalSkills.map((skill,index)=><span key={index}>{index? ',':''} {skill}</span>)}.
                 </Typography>
             </CardContent>
             <CardActions>

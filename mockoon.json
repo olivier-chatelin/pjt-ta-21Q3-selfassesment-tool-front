@@ -1,6 +1,6 @@
 {
   "uuid": "2ad2dd99-78e5-4691-95c9-1acd482df0ab",
-  "lastMigration": 18,
+  "lastMigration": 19,
   "name": "Self",
   "endpointPrefix": "",
   "latency": 0,
@@ -74,7 +74,6 @@
   "proxyMode": false,
   "proxyHost": "",
   "proxyRemovePrefix": false,
-  "https": false,
   "cors": true,
   "headers": [
     {
@@ -105,5 +104,14 @@
       "key": "",
       "value": ""
     }
-  ]
+  ],
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  }
 }

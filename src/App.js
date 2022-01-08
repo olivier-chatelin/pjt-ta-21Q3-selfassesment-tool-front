@@ -8,7 +8,7 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route exact path="/checkpoints">
+                <Route exact path="/">
                     <Checkpoints/>
                 </Route>
                 <Route  path="/checkpoints/:id">

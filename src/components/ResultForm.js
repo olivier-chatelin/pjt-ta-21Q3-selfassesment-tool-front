@@ -13,8 +13,7 @@ function ResultForm ({checkpointId}) {
     const handleSubmit = (event)=>{
         event.preventDefault();
         let result = {
-            firstname: firstname,
-            lastname: lastname,
+            fullName: firstname + " " + lastname,
             result_data: getObjectivesBy('checkpointId',checkpointId)
         }
         axios.post('https://localhost:8000/results',JSON.stringify(result))

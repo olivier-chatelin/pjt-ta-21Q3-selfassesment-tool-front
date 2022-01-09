@@ -4,39 +4,73 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import axios from "axios";
+import {useLocalStorage} from "../hooks/useLocalStorage";
 
 
 function ConnectionForm(){
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [curriculum, setCurriculum] = useState('PHP');
-    const [instructor, setInstructor] = useState('Guillaume Harari');
+    const [localFirstName, setLocalFirstname] = useLocalStorage("firstname","")
+    const [localLastName, setLocalLastname] = useLocalStorage("lastname","")
+    const [localFullName, setLocalFullName] = useLocalStorage("fullName","")
+    const [localCurriculum, setLocalCurriculum] = useLocalStorage("curriculum","");
+    const [localInstructor, setLocalInstructor] = useLocalStorage("instructor","");
+    const [curricula, setCurricula] = useState([]);
+    const [instructors, setInstructors] = useState([]);
+    useEffect(() => {
+        getInstructors();
+    }, []);
+    useEffect(() => {
+        getCurricula();
+    }, []);
     const handleFirstname = (event) => {
-        setFirstname(event.target.value);
+        setLocalFirstname(event.target.value);
+        setLocalFullName(event.target.value + " " + localLastName);
     }
     const handleLastname = (event) => {
-        setLastname(event.target.value);
+        setLocalLastname(event.target.value);
+        setLocalFullName(localFirstName + " " + event.target.value);
     }
     const handleCurriculum = (event) => {
-        setCurriculum(event.target.value);
+        setLocalCurriculum(event.target.value);
+
     }
+    const handleInstructor = (event) => {
+        setLocalInstructor(event.target.value);
+    }
+    function getInstructors() {
+        axios.get('https://localhost:8000/instructors')
+            .then((response) => response.data)
+            .then((data) => {
+                    setInstructors(data);
+                }
+            );
+    }
+    function getCurricula() {
+        axios.get('https://localhost:8000/curriculum')
+            .then((response) => response.data)
+            .then((data) => {
+                    setCurricula(data);
+                }
+            );
+    }
+        console.log('instructors', instructors);
+        console.log('curricula', curricula);
     return(
         <Box sx={{ minWidth: 120 }}>
-                <Box component="form" noValidate autoComplete="off" sx={{display: 'flex', flexDirection: 'column'}}>
-                    <TextField  label="Prénom" variant="outlined" onChange={handleFirstname}  sx={{my:2}}/>
-                    <TextField  label="Nom" variant="outlined" onChange={handleLastname} sx={{my:2}}/>
+                <Box component="form" noValidate sx={{display: 'flex', flexDirection: 'column'}}>
+                    <TextField  label="Ton prénom" variant="outlined" onChange={handleFirstname}  sx={{my:2}}/>
+                    <TextField  label="Ton nom" variant="outlined" onChange={handleLastname} sx={{my:2}}/>
                     <FormControl fullWidth sx={{my:2}}>
-                    <InputLabel id="curriculum-label">Curriculum</InputLabel>
+                    <InputLabel id="curriculum-label">Cursus</InputLabel>
                         <Select
                             labelId="curriculum-label"
                             id="curriculum"
-                            label="Curriculum"
-                            value={curriculum}
+                            label="Cursus"
                             onChange={handleCurriculum}
                         >
-                            <MenuItem value={'PHP'}>PHP</MenuItem>
-                            <MenuItem value={'JS'}>JS</MenuItem>
-                            <MenuItem value={'DATA'}>DATA</MenuItem>
+                            {curricula.map((curriculum, index) =>
+                            <MenuItem key={index} value={curriculum}>{curriculum}</MenuItem>
+                            )}
                         </Select>
                     </FormControl>
                     <FormControl fullWidth>
@@ -45,11 +79,11 @@ function ConnectionForm(){
                             labelId="instructor-label"
                             id="instructor"
                             label="Formateur"
-                            value={instructor}
-                            onChange={handleCurriculum}
+                            onChange={handleInstructor}
                         >
-                            <MenuItem value={'Guillaume Harari'}>Guillaume Harari</MenuItem>
-                            <MenuItem value={'Vincent Vaur'}>Vincent Vaur</MenuItem>
+                            {instructors.map((instructor, index) =>
+                                <MenuItem key={index} value={instructor}>{instructor}</MenuItem>
+                            )}
                         </Select>
                     </FormControl>
                     <Button variant="contained" sx={{width:1/4, my:2}}>

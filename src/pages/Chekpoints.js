@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Checkpoint from "../components/Checkpoint";
+import {getStorageValue} from "../hooks/useLocalStorage";
 
 function Checkpoints() {
     const [checkpoints, setCheckpoints] = useState([]);
-    const [curriculum, setCurriculum] =useState('PHP');
 
 
     useEffect(() => {
@@ -17,12 +17,11 @@ function Checkpoints() {
                 .then((data) => {
                         // console.log(data);
                         setCheckpoints(data);
-                        console.log('checkpoints',checkpoints);
                     }
                 );
     }
     return (
-        checkpoints.filter(checkpoint => checkpoint.curriculum === curriculum)
+        checkpoints.filter(checkpoint => checkpoint.curriculum === getStorageValue('curriculum',''))
             .map(checkpoint =>
                 <Checkpoint
                     key={checkpoint.id}

@@ -3,8 +3,8 @@ import {Box, Container, Checkbox,Input, FormHelperText} from '@mui/material';
 import ConnectionForm from "../components/ConnectionForm";
 import CssBaseline from '@mui/material/CssBaseline';
 
-function Home(){
 
+function Home(){
     return(
         <React.Fragment>
             <CssBaseline />

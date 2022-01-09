@@ -5,7 +5,9 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import axios from "axios";
+import LetsGo from "./LetsGo";
 import {useLocalStorage} from "../hooks/useLocalStorage";
+import {getStorageValue} from "../hooks/useLocalStorage";
 
 
 function ConnectionForm(){
@@ -55,11 +57,17 @@ function ConnectionForm(){
     }
         console.log('instructors', instructors);
         console.log('curricula', curricula);
+        let firstname = getStorageValue('firstname',null);
+        let lastname = getStorageValue('lastname',null);
+        let fullName = getStorageValue('fullName',null);
+        console.log('firstname',firstname)
+        console.log('lastname',lastname)
+        console.log('fullName',fullName)
     return(
         <Box sx={{ minWidth: 120 }}>
                 <Box component="form" noValidate sx={{display: 'flex', flexDirection: 'column'}}>
                     <TextField  label="Ton prénom" variant="outlined" onChange={handleFirstname}  sx={{my:2}}/>
-                    <TextField  label="Ton nom" variant="outlined" onChange={handleLastname} sx={{my:2}}/>
+                    <TextField  label="Ton nom" variant="outlined" onChange={handleLastname} sx={{my:2}} />
                     <FormControl fullWidth sx={{my:2}}>
                     <InputLabel id="curriculum-label">Cursus</InputLabel>
                         <Select
@@ -86,9 +94,7 @@ function ConnectionForm(){
                             )}
                         </Select>
                     </FormControl>
-                    <Button variant="contained" sx={{width:1/4, my:2}}>
-                        Let's Go
-                    </Button>
+                    <LetsGo/>
                 </Box>
         </Box>
     )

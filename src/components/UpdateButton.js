@@ -8,7 +8,7 @@ function UpdateButton() {
 
     }
     return (
-        <Button onClick={handleUpdate} variant="contained" sx={{ m:2}}>
+        <Button onClick={handleUpdate} variant="contained" sx={{ m:2,color:'white'}}>
             Continuer avec un autre profil
         </Button>
     )

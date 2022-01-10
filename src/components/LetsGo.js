@@ -3,7 +3,7 @@ import {Button} from "@mui/material";
 
 function LetsGo() {
     return(
-        <Button href="/checkpoints" variant="contained" sx={{width:1/4, m:2}}>
+        <Button href="/checkpoints" variant="contained" sx={{width:1/4, m:2, color:'white'}}>
             Let's Go
         </Button>
     )

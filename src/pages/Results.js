@@ -1,5 +1,5 @@
 import {Box} from "@mui/material";
-import ResultForm from "../components/ResultForm";
+import SendDataButton from "../components/SendDataButton";
 
 import '../App.scss';
 import {
@@ -11,6 +11,7 @@ import "react-circular-progressbar/dist/styles.css";
 import {getRatiosByCheckpointId, getSkillsByCheckPointId, getDataSkillsByCheckpointId} from "../services/objectiveRepository";
 import React from 'react';
 import { Radar } from 'react-chartjs-2';
+
 
 
 function Results(){
@@ -32,9 +33,12 @@ function Results(){
             {
                 label: 'skills',
                 data: skillData,
-                backgroundColor: 'rgba(62,152,199,0.2)',
-                borderColor: 'rgba(62,152,199,1)',
-                borderWidth: 1,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(255, 99, 132)',
+                pointBackgroundColor: 'rgb(255, 99, 132)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 99, 132)'
             },
             {
                 label: 'objective 100%',
@@ -58,7 +62,8 @@ function Results(){
     };
 
     return(
-        <Box sx={{display:"flex", alignItems:"center", mt:10}}>
+        <>
+        <Box sx={{display:"flex", alignItems:"center"}}>
             <Box sx={{width:"30%"}} >
                 <Box sx={{width:"50%", ml:"50%"}}>
                       <CircularProgressbarWithChildren
@@ -87,11 +92,11 @@ function Results(){
                     <Radar data={data} options={options} />
                 </Box>
             </Box>
-            <Box>
-                <ResultForm checkpointId = {checkpointId} />
-            </Box>
         </Box>
-
+        <Box sx={{display:"flex",justifyContent:"center"}}>
+            <SendDataButton checkpointId = {checkpointId} />
+        </Box>
+        </>
     );
 }
 export default Results

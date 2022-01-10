@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Box, TextField, Button,Input, FormHelperText} from '@mui/material';
+import {Box, TextField, Button, Input, FormHelperText, ThemeProvider} from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -8,7 +8,15 @@ import axios from "axios";
 import LetsGo from "./LetsGo";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import {getStorageValue} from "../hooks/useLocalStorage";
+import {createTheme} from "@mui/material/styles";
 
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#F76C6C',
+        },
+    },
+});
 
 function ConnectionForm(){
     const [localFirstName, setLocalFirstname] = useLocalStorage("firstname","")
@@ -40,7 +48,7 @@ function ConnectionForm(){
         setLocalInstructor(event.target.value);
     }
     function getInstructors() {
-        axios.get('https://localhost:8000/instructors')
+        axios.get('https://www.self-assesment.mezzaburo.fr/instructors')
             .then((response) => response.data)
             .then((data) => {
                     setInstructors(data);
@@ -48,22 +56,19 @@ function ConnectionForm(){
             );
     }
     function getCurricula() {
-        axios.get('https://localhost:8000/curriculum')
+        axios.get('https://www.self-assesment.mezzaburo.fr/curriculum')
             .then((response) => response.data)
             .then((data) => {
                     setCurricula(data);
                 }
             );
     }
-        console.log('instructors', instructors);
-        console.log('curricula', curricula);
         let firstname = getStorageValue('firstname',null);
         let lastname = getStorageValue('lastname',null);
         let fullName = getStorageValue('fullName',null);
-        console.log('firstname',firstname)
-        console.log('lastname',lastname)
-        console.log('fullName',fullName)
     return(
+        <ThemeProvider theme={theme}>
+
         <Box sx={{ minWidth: 120 }}>
                 <Box component="form" noValidate sx={{display: 'flex', flexDirection: 'column'}}>
                     <TextField  label="Ton prénom" variant="outlined" onChange={handleFirstname}  sx={{my:2}}/>
@@ -97,6 +102,7 @@ function ConnectionForm(){
                     <LetsGo/>
                 </Box>
         </Box>
+        </ThemeProvider>
     )
 }
 export default ConnectionForm

@@ -1,12 +1,19 @@
 import React from "react";
-import {Card, Typography} from "@mui/material";
+import {Card, ThemeProvider, Typography} from "@mui/material";
 import {CardContent} from "@mui/material";
 import {CardActions} from "@mui/material";
 import {Button} from "@mui/material";
 import "../App.scss";
 import {Link} from "react-router-dom";
+import {createTheme} from "@mui/material/styles";
 
-
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#F76C6C',
+        },
+    },
+});
 function Checkpoint(props) {
     return(
         <Card sx={{maxWidth: 600, margin: 5 }}>
@@ -26,7 +33,9 @@ function Checkpoint(props) {
             </CardContent>
             <CardActions>
                 <Link to={'/checkpoints/' + props.id}  >
-                    <Button size="small">Compléter</Button>
+                    <ThemeProvider theme={theme}>
+                        <Button size="small">Compléter</Button>
+                    </ThemeProvider>
                 </Link>
             </CardActions>
         </Card>

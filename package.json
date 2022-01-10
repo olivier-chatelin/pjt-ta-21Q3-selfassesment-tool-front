@@ -1,5 +1,6 @@
 {
   "name": "self-front",
+  "homepage": "https://auto-eval.mezzaburo.fr",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
